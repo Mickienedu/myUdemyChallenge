@@ -192,3 +192,128 @@ book.call(swiss, ...flightData);
 
 
 //134. The bind Method
+const bookEw = book.bind(eurowings);
+const bookLh = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEw(23, 'Steven Williams');
+
+const bookEw23 = book.bind(eurowings, 23);
+bookEw23('Mickie Okorie');
+bookEw23('Martha Okorie');
+
+// with addEventListener
+lufthansa.planes = 300;
+lufthansa.buyPlane = function() {
+    console.log(this);
+
+    this.planes++;
+    console.log(this.planes);
+};
+// lufthansa.buyPlane();
+document.querySelector('.buy')
+.addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+
+//Partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23;
+
+console.log(addVAT(100)); //123
+console.log(addVAT(23)); //28.29
+
+
+// small challenge.. another way of doing it
+const addTaxRate = function(rate) {
+    return function(value) {
+        return value + value * rate;
+    };
+};
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));  //123
+console.log(addVAT2(23)); // 28.29
+
+
+
+// 136. Immediately Invoked Function Expressions (IIFE)
+const runOnce = function () {
+    console.log('this will never run again');
+};
+runOnce();
+
+// (IIFE)
+(function () {
+    console.log('this will never run again');
+})();
+
+// with arrowFunction
+(() => console.log('this will ALSO never run again'))();
+
+
+
+// 137. Closures
+/*A closure is the closed over variable environment of the execution context
+in which a function was created, even after that execution context is gone
+2. A closure makes sure that a function doesnt loose connection to variables
+that existed at the fuction's birth place*/
+const secureBooking = function() {
+    let passengerCount = 0;
+
+    return function() {
+        passengerCount++;
+        console.log(`${passengerCount} passengers`);
+    }
+}
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
+
+
+
+// 138. More Closure Examples
+
+//EXAMPLE 1
+let f;
+const g = function() {
+    const a = 23;
+    f = function() {
+        console.log(a * 2);
+    };
+};
+
+const h = function() {
+    const b = 777;
+    f = function () {
+        console.log(b * 2);
+    };
+}
+g();
+f();
+console.dir(f);
+
+//Re-assigning f function
+h();
+f();
+console.dir(f);
+
+//EXAMPLE 2
+const boardPassengers = function(n, wait) {
+    const perGroup = n / 3;
+
+    setTimeout(function() {
+        console.log(`We are now boarding all ${n} passengers`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    }, wait * 1000);
+
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000;
+boardPassengers(180, 3)
