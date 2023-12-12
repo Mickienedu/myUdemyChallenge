@@ -40,7 +40,7 @@
   
     transition: transform 1s, opacity 1s;
   }
-  
+  /* 198. Revealing Elements on Scroll */
   .section--hidden {
     opacity: 0;
     transform: translateY(8rem);
