@@ -194,6 +194,26 @@ static hey() {
     console.log(this);
 }
 }
+// 220. Inheritance Between "Classes": ES6 Classes
+class StudentCl extends PersonCl {
+    constructor(fullName, birthYear, course) {
+        // always needs to happen first 
+        super(fullName, birthYear);
+        this.course = course;
+    }
+    introduce() {
+        console.log(`My name is ${this.fullName} and i study ${this.course}`);
+    }
+    calcAge() {
+        console.log(`I'm ${2037 - this.birthYear} years old, but as a student 
+        i feel more like ${2037 - this.birthYear + 10}`);
+    }
+}
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
+//////////////////////////
+
 
 const jessica = new PersonCl('Jessica Davies', 1996);
 console.log(jessica);
@@ -238,7 +258,7 @@ console.log(account.movements); */
 
 // 215. Static Methods
 
-// 216. Object.create
+/*// 216. Object.create
 const PersonProto = {
     calcAge() {
         console.log(2037 - this.birthYear);
@@ -262,7 +282,7 @@ console.log(steven.__proto__ === PersonProto);
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
-
+*/
 
 /*
 Coding Challenge #2
@@ -278,7 +298,7 @@ Test data:
 § Data car 1: 'Ford' going at 120 km/h
 GOOD LUCK �
  */
-class CarCl { 
+/* class CarCl { 
     constructor(make, speed) {
     this.make = make;
     this.speed = speed;
@@ -306,7 +326,7 @@ ford.accelerate();
 ford.accelerate();
 ford.brake();
 ford.speedUS = 50;
-console.log(ford);
+console.log(ford); */
 
 
 // 218. Inheritance Between "Classes": Constructor Functions
@@ -318,7 +338,7 @@ Person.prototype.calcAge = function () {
     console.log(2037 - this.birthYear);
 };
 
-const Student = function(firstName, birthYear, course) {
+const Student = function(firstName, birthYear, course) {  // the 'Student' class is 
  
     Person.call(this, firstName, birthYear)
     this.course = course;
@@ -406,3 +426,130 @@ tesla.accelerate();
 
 
 // 220. Inheritance Between "Classes": ES6 Classes
+
+/*// 221. Inheritance Between "Classes": Object.create
+
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course) {
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+};
+
+StudentProto.introduce = function() {
+    console.log(`My name is ${this.fullName} and i study ${this.course}`);
+
+}
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge(); */
+
+
+// 222. Another Class Example
+// PUBLIC FIELDS
+// PRIVATE FIELDS
+// PUBLIC METHODS
+// PRIVATE METHODS
+// STATIC METHODS 
+
+class Account {
+    // PUBLIC FIELDS (INSTANCES)
+    locale = navigator.language;
+
+    //PRIVATE  FIELDS (instances)
+    #movements = [];
+    #pin;
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+          // protected property with encapuslation 
+        this.#pin = pin;
+        // this.#movements = [];
+        // this.locale = navigator.language;
+
+        console.log(`Thanks to opening an account, ${owner}`);
+    }
+
+    // PUBLIC INTERFACE 
+    getMovements() {
+        return this.#movements;   //protected with encapuslation added
+    }
+    deposit(val) {
+        this.#movements.push(val); //protected with encapuslation added
+        return this;
+    };
+
+    withdraw(val) {
+        this.deposit(-val);
+        return this;
+    }
+
+    requestLoan(val) {
+        // if(this.#approveLoan(val)) {  
+        if(this._approveLoan(val)) {  
+            this.deposit(val);
+            console.log('Loan approved');
+            return this;
+        }
+    }
+    static helper() {
+        console.log('Helper');
+    }
+    // PRIVATE METHOD 
+      //protected with encapuslation added. the underscore _ is the protector and encapsul..
+    //   #approveLoan(val){  
+      _approveLoan(val){  
+        return true;
+    }
+
+}
+const acc1 = new Account('Mickie', 'EUR', 1111);
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+console.log(acc1.getMovements());
+
+console.log(acc1);
+// console.log(acc1.pin);
+Account.helper();
+
+
+// 223. Encapsulation: Protected Properties and Methods
+// Encapuslation simply means keeping some propereties and methods private inside the class 
+// and not supposed to be touched outside the class 
+
+// 224. Encapsulation: Private Class Fields and Methods
+
+// 225. Chaining Methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(2500).withdraw(4000);
+console.log(acc1.getMovements());
+
+// 226. ES6 Classes Summary
+
+/*
+Coding Challenge #4
+Your tasks:
+1. Re-create Challenge #3, but this time using ES6 classes: create an 'EVCl'
+child class of the 'CarCl' class
+2. Make the 'charge' property private
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery'
+methods of this class, and also update the 'brake' method in the 'CarCl'
+class. Then experiment with chaining!
+Test data:
+§ Data car 1: 'Rivian' going at 120 km/h, with a charge of 23%
+GOOD LUCK �
+*/
