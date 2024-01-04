@@ -26,7 +26,7 @@
 // addToCart('bread', 5)
 // console.log(price, tq);
 
-console.log('Importing module');  
+/* console.log('Importing module');  
 
 // import * as ShoppingCart from './shoppingCart.js';
 // ShoppingCart.addToCart('bread', 5);
@@ -39,6 +39,7 @@ add('bread', 10);
 add('apple', 3);
 
 console.log(cart);
+*/
 
 
 
@@ -163,7 +164,7 @@ TO DELETE FOLDER:
  --npm install (without any name. any deleted package will be installed back)
 */
 
-import cloneDeep from '/node_modules/lodash-es/cloneDeep.js';
+/* import cloneDeep from '/node_modules/lodash-es/cloneDeep.js';
 // import cloneDeep from 'lodash';
 
 const state = {
@@ -180,6 +181,7 @@ state.user.loggedIn = false;
 console.log(stateClone);
 
 console.log(stateDeepClone);
+*/
 
 
 
@@ -216,3 +218,57 @@ TO INSTALL REGENERATOR-RUNTIME:
 
 
 // 282. Declarative and Functional JavaScript Principles
+
+
+// 286. Project Overview and Planning (I)
+/*
+USER STORY: Description of the application's functionally from the user's perspective.
+COMMMON FORMAT; As a [type of user], i want [an action] so that [a benefit]
+
+As a user, want to SEARCH FOR RECIPES, so that i can find new ideas for meals.
+FEATURES: Search functionality, input field to send request to API with searched keywords.
+Display results with pagnation.
+Display recipe with cooking time, servings and ingredients.
+
+AS a user, i want to be able to UPDATE THE NUMBER OF SERVINGS, so that i can cook a meal
+for different number of people.
+FEATURES: Change servings functionality, update all ingredients according to current
+number of servings.
+
+As a user, i want to BOOKMARK RECIPES, so that i can review them later.
+FEATURES: Bookmarking functionality, display list of all bookmarked recipes.
+
+As a user, i want to be able to CREATE MY OWN RECIPES, so that i have them all 
+organized in the same app.
+FEATURES: User can upload own recipes.
+User recipes will automatically be bookmarked.
+User can only see their own recipes, not recipes from other users.
+
+As a user, i want to be able to SEE MY BOOKMARKS AND OWN RECIPES WHEN I LEAVE THE APP 
+AND COME BACK LATER, so that i can close the app safely after cooking.
+FEATURES: Store bookmark data in browser using local storage.
+On page load, read saved bookmarks from local storage and display
+
+
+288. Loading a Recipe from API
+
+*/
+const recipeContainer = document.querySelector('.recipe');
+
+const timeout = function(s) {
+    return new Promise(function (_, reject) {
+        setTimeout(function () {
+            reject(new Error(`Request took too long! Timeout after ${s} 
+            second`));
+        }, s * 1000);
+    });
+};
+
+/*
+HOW I CREATED FORKIFY APP ON TERMINAL
+--npm init
+PACKAGE NAME: forkifyy
+version: 'hit enter'
+Description: recipe application
+'always hit enter
+*/

@@ -1,13 +1,13 @@
 {
-  "name": "javascript-udemy-course",
+  "name": "forkify",
   "version": "1.0.0",
-  "description": "",
+  "description": "Recipe application",
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "author": "",
+  "author": "Mickie",
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.34.0",
